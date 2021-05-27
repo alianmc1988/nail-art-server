@@ -5,9 +5,7 @@ const ServiceSchema = new Schema ({
     
         service_name: { type: String, require: true },    
         description: { type:String, require: true },  
-        price: { type:Number,require: true },
-        appoinment: {type:Date}
-        
+        price: { type:Number,require: true }
     }
 );
  

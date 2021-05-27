@@ -24,6 +24,7 @@ app.use(morgan('dev'));
 
 //=============Routes============
 app.use('/api/services', require('./src/routes/servicesRoutes'));
+app.use('/api/appointments',require('./src/routes/appointmentRoutes'));
 
 
 
