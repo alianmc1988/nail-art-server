@@ -2,38 +2,42 @@
 const express = require('express');
 const cors = require('cors');
 const morgan = require('morgan');
-var bodyParser = require('body-parser');
 var fs = require('fs');
 
+
 var app = express();
+
+// =====Server Config===========
+var Port = process.env.PORT || 3000;
+app.set('port', Port)
+
+// ======DB_Starting=============
+const {mongo} = require('./src/database/db');
+
 
 // =====Middlewares====
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(cors());
 app.use(morgan('dev'));
-app.use(express.static(__dirname));
 
 
 //=============Routes============
-app.get('/', (req, res) => {
-    return res.send('<h2>Welcome to Express App<h2>');
-})
+app.use('/api/services', require('./src/routes/servicesRoutes'));
 
 
 
 
 
-// ======DB_Starting=============
-const {mongo} = require('./src/database/db')
+
 
 // ======Server Configs==========
-var Port = process.env.PORT || 3000;
+
 var IP = process.env.IP || '127.0.0.1';
-app.listen(Port, IP, (err) => {
+app.listen(app.get('port'), IP, (err) => {
     if (err) {
        console.log(err)
    } else {
-       console.log('Server is listening at ' + IP + ':' + Port);
+       console.log('Server is listening at ' + IP + ':' + app.get('port'));
     }
 });
