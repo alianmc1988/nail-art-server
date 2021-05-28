@@ -1,8 +1,16 @@
 const mongoose = require ('mongoose');
-const url_DB = 'mongodb://localhost';
+const url_DB = 'mongodb://localhost/nailStyle_db';
+const objConfig = { useNewUrlParser: true, useUnifiedTopology: true };
 
-mongoose.connect(`${url_DB}/nailStyle_db`, { useNewUrlParser: true, useUnifiedTopology: true })
-    .then(db=> console.log('DB is connected'))
+
+
+mongoose.connect(url_DB, objConfig)
+    .then(db=> {
+            console.log('DB is connected')
+            
+            })
     .catch(err=> console.log(err));
-    
-module.exports = mongoose;  
+
+
+module.exports = mongoose;
+

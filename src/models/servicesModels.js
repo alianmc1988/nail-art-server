@@ -9,4 +9,4 @@ const ServiceSchema = new Schema ({
     }
 );
  
-module.exports = mongoose.model ('User', ServiceSchema);
+module.exports = mongoose.model ('Service', ServiceSchema);
