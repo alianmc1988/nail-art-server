@@ -9,6 +9,7 @@ var app = express();
 
 // =====Server Config===========
 var Port = process.env.PORT || 3000;
+var IP = process.env.IP || '127.0.0.1';
 app.set('port', Port)
 
 // ======DB_Starting=============
@@ -24,12 +25,13 @@ app.use(morgan('dev'));
 
 //=============Routes============
 app.use('/api/services', require('./src/routes/servicesRoutes'));
-app.use('/api/appointments',require('./src/routes/appointmentRoutes'));
+app.use('/api/appointments', require('./src/routes/appointmentRoutes'));
+app.use('/api/blog', require('./src/routes/blogRoutes'));
 
 
 // ======Server Configs==========
 
-var IP = process.env.IP || '127.0.0.1';
+
 app.listen(app.get('port'), IP, (err) => {
     if (err) {
        console.log(err)

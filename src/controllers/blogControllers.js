@@ -1,36 +1,36 @@
-const Service = require ('../models/servicesModels');
-const serviceCtrl = {};
+const Blog = require ('../models/blogModels');
+const blogCtrl = {};
 
 
 
-serviceCtrl.getListServices = async (req, res)=>{
+blogCtrl.getListBlogs = async (req, res)=>{
     try{
         const mongo = require('../../src/database/db');
-        const services = await Service.find();
+        const blog = await Blog.find();
         mongo.disconnect(res=> console.log('DB Disconnected'));
-        res.json({success:true,services}).status(200);
+        res.json({success:true,blog}).status(200);
     }catch(error){
         res.json({message:'DB is empty'}).status(404);
     }
 }
 
-serviceCtrl.getSelectedService = async (req, res)=>{
+blogCtrl.getSelectedBlog = async (req, res)=>{
     try {
         const mongo = require('../../src/database/db');
         const id = req.params.id;
-        const service = await Service.findById(id);
+        const blog = await Blog.findById(id);
         mongo.disconnect(res=> console.log('DB Disconnected'));
-        res.json({success:true, service}).status(200);
+        res.json({success:true, blog}).status(200);
     }catch(error) {
         res.json({message:"no match"}).status(404)
     }
 }
 
-serviceCtrl.createServices = async (req, res)=>{
+blogCtrl.createBlog = async (req, res)=>{
     try{
         const mongo = require('../../src/database/db');
-        const service = new Service(req.body);
-        await service.save();
+        const blog = new Blog(req.body);
+        await blog.save();
         mongo.disconnect(res=> console.log('DB Disconnected'));
         res.json({success:true}).status(200);
     }catch(error){
@@ -39,31 +39,32 @@ serviceCtrl.createServices = async (req, res)=>{
     }
 }
 
-serviceCtrl.updateServices = async (req, res)=>{
+blogCtrl.updateBlog = async (req, res)=>{
 
     const id = req.params.id;
-    let service = {
+    let blog = {
         _id:id,
-        service_name:req.body.service_name,
+        name:req.body.name,
         description:req.body.description,
-        price:req.body.price
+        qualification: req.body.qualification,
+        date:req.body.date
     }
     try{
         const mongo = require('../../src/database/db');
-        await Service.findByIdAndUpdate(id,{$set: service}, {new:true});
+        await Blog.findByIdAndUpdate(id,{$set: service}, {new:true});
         mongo.disconnect(res=> console.log('DB Disconnected'));
-        res.json({success:true, service}).status(200);
+        res.json({success:true, blog}).status(200);
     }catch(error){
         res.json({success:false}).status(404);
     }
 }
 
-serviceCtrl.deleteServices = async (req, res)=>{
+blogCtrl.deleteBlog = async (req, res)=>{
 
     const id = req.params.id;
     try {
         const mongo = require('../../src/database/db');
-        await Service.findByIdAndRemove(id);
+        await Blog.findByIdAndRemove(id);
         mongo.disconnect(res=> console.log('DB Disconnected'));
         res.json({success:true}).status(200);
     }catch(error){
@@ -71,4 +72,4 @@ serviceCtrl.deleteServices = async (req, res)=>{
     }
 }
 
-module.exports = serviceCtrl;
+module.exports = blogCtrl;
