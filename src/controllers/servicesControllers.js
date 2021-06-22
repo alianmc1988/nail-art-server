@@ -6,7 +6,7 @@ const serviceCtrl = {};
 serviceCtrl.getListServices = async (req, res)=>{
     try{
     
-        const DB = require ('../../src/database/db');
+        
         const services = await Service.find();
         res.json(services).status(200);
         
@@ -17,7 +17,7 @@ serviceCtrl.getListServices = async (req, res)=>{
 
 serviceCtrl.getSelectedService = async (req, res)=>{
     try {
-        const DB = require('../../src/database/db');
+        
         const id = req.params.id;
         const service = await Service.findById(id);
         res.json({success:true, service}).status(200);
@@ -28,7 +28,7 @@ serviceCtrl.getSelectedService = async (req, res)=>{
 
 serviceCtrl.createServices = async (req, res)=>{
     try{
-        const DB = require('../../src/database/db');
+        
         const service = new Service(req.body);
         await service.save();
         res.json({success:true}).status(200);
@@ -48,7 +48,7 @@ serviceCtrl.updateServices = async (req, res)=>{
         price:req.body.price
     }
     try{
-        const DB = require('../../src/database/db');
+        
         await Service.findByIdAndUpdate(id,{$set: service}, {new:true});
         res.json({success:true, service}).status(200);
     }catch(error){
@@ -60,7 +60,7 @@ serviceCtrl.deleteServices = async (req, res)=>{
 
     const id = req.params.id;
     try {
-        const DB = require('../../src/database/db');
+        
         await Service.findByIdAndRemove(id);
         res.json({success:true}).status(200);
     }catch(error){
