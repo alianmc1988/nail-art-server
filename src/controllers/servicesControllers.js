@@ -42,14 +42,15 @@ serviceCtrl.updateServices = async (req, res)=>{
 
     const id = req.params.id;
     let service = {
-        _id:id,
+        _id:req.body._id,
         service_name:req.body.service_name,
         description:req.body.description,
         price:req.body.price
     }
+    console.log(service)
     try{
-        
-        await Service.findByIdAndUpdate(id,{$set: service}, {new:true});
+       const a = await Service.findOneAndUpdate ({_id:id},{$set: service}, {new: true});
+       //console.log(a)
         res.json({success:true, service}).status(200);
     }catch(error){
         res.json({success:false}).status(404);
@@ -60,8 +61,8 @@ serviceCtrl.deleteServices = async (req, res)=>{
 
     const id = req.params.id;
     try {
-        
-        await Service.findByIdAndRemove(id);
+        console.log(id);
+        await Service.findOneAndRemove({_id:id});
         res.json({success:true}).status(200);
     }catch(error){
         res.json(error).status(404);

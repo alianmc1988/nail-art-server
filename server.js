@@ -6,8 +6,6 @@ const morgan = require('morgan');
 const ExpressMongoSanitize = require('express-mongo-sanitize');
 const xss = require('xss-clean')
 var app = express();
-//passport
-//const passport = require ('passport');
 
 // =====Server Config===========
 var Port = process.env.PORT || 3000;
@@ -23,19 +21,11 @@ const DB = require ('./src/database/db');
     app.use(express.urlencoded({ extended: false }));
     app.use(express.json());
     app.use(cors({
-        origin:['http://localhost:4200', 'http://127.0.0.1:4200'],
         credentials:true
     }));
     app.use(ExpressMongoSanitize());
     app.use(xss());
     app.use(morgan('dev'));
-    //session
-    //app.use(passport());
-    
-    
-    
-
-
 
 //=============Routes============
 app.use('/api/services', require('./src/routes/servicesRoutes'));
