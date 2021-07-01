@@ -4,11 +4,11 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon server.js"
+    "dev": "nodemon server.js",
+    "start": "server.js"
   },
   "keywords": [],
-  "author": "",
+  "author": "Alian",
   "license": "ISC",
   "dependencies": {
     "bcrypt": "^5.0.1",
@@ -16,7 +16,6 @@
     "express": "^4.17.1",
     "express-jwt": "^6.0.0",
     "express-mongo-sanitize": "^2.1.0",
-    "express-session": "^1.17.2",
     "jsonwebtoken": "^8.5.1",
     "mongodb": "^3.6.9",
     "mongoose": "^5.12.11",
